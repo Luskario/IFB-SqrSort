@@ -31,28 +31,56 @@ void bubbleSort(int *V, int ini, int tam, int tam_total){
 	} while(cont != 0);
 }
 
-void heapify(int *V, int n, int i){
-    int l = 2 * i + 1;
-    int r = 2 * i + 2;
-	int aux;
-	int maior = i;
 
-    if (l < n && V[l] > V[maior]){
-		maior = l;
-	}
-        
-    if (r < n && V[r] > V[maior]){
-		maior = r;
-	}
+//---------------------------------------------------------------------------------//
 
-    if (maior != i) {
-		aux = V[i];
+
+void heapify(int *V, int tam_total, int i){
+	int aux, aux2;
+	int l, r, maior;
+	while(i < tam_total){
+		l = 2*i+1;
+		r = 2*i+2;
+		maior = i;
+
+		if(l <tam_total && V[l]>V[i]){
+			maior = l;
+		}
+		if(r <tam_total && V[r]>V[maior]){
+			maior = r;
+		}
+		if(maior == i){
+			break;
+		}
+
+		aux2 = V[i];
 		V[i] = V[maior];
-		V[maior] = V[i];
-        heapify(V, n, maior);
-    }
+		V[maior] = aux2;
+
+		i = maior;
+	}
 }
 
-void makeHeap(int *V, int ini, int tam, int tam_total){
-
+void heapify_bottom_up(int *V, int tam_total, int i){
+	while(i > 0){
+		int p = (i-1)/2;
+		if(V[p]<V[i]){
+			
+			i = p;
+		}
+		else{
+			break;
+		}
+	}
 }
+
+
+
+void makeHeap(int *V, int tam_total){
+	int i;
+	
+	for(i=(tam_total/2); i>=0; i-- ){
+		heapify(V, tam_total, i);
+	}
+}
+
