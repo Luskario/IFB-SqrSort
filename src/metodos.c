@@ -45,7 +45,7 @@ void heapify(int *V, int n, int i){
 		maior = r;
 	}
 
-    if (largest != i) {
+    if (maior != i) {
 		aux = V[i];
 		V[i] = V[maior];
 		V[maior] = V[i];
