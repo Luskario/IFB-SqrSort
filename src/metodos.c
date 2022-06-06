@@ -35,21 +35,21 @@ void heapify(int *V, int n, int i){
     int l = 2 * i + 1;
     int r = 2 * i + 2;
 	int aux;
-	int largest = i;
+	int maior = i;
 
-    if (l < n && V[l] > V[largest]){
-		largest = l;
+    if (l < n && V[l] > V[maior]){
+		maior = l;
 	}
         
-    if (r < n && V[r] > V[largest]){
-		largest = r;
+    if (r < n && V[r] > V[maior]){
+		maior = r;
 	}
 
     if (largest != i) {
 		aux = V[i];
-		V[i] = V[largest];
-		V[largest] = V[i];
-        heapify(V, n, largest);
+		V[i] = V[maior];
+		V[maior] = V[i];
+        heapify(V, n, maior);
     }
 }
 
