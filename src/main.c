@@ -10,10 +10,12 @@ int main (void){
     int i, c, vezes=1;
     //clock_t timer;
     //float temp_m[8] = {0, 0, 0, 0, 0, 0, 0, 0}, temp_aux;
-    int teste[10] = {76, 18, 1, 43, 42, 2, 5, 7, 9, 10};
+    Dado teste[10] = {{43, 0, 0},{12, 0, 0},{78, 0, 0},{32, 0, 0},{43, 0, 0},{11, 0, 0},{14, 0, 0},
+                    {1, 0, 0},{15, 0, 0},{98, 0, 0}};
     //int* vetor = (int*)malloc(10000000*sizeof(int));
     //int vetor[1000000];
     //int* aux = (int*)malloc(10000000*sizeof(int));
+    Dado* aux;
 
     //for(i=0; i<1; i++){
 
@@ -30,10 +32,14 @@ int main (void){
         //----------------------------------------------------------------//
 
     //}
-    
-    makeHeap(teste, 10);
     for(i=0; i<10; i++){
-        printf("%d - ", teste[i]);
+        printf("%d - ", teste[i].valor);
+    }
+    printf("\n");
+    //makeHeap(teste, 4, 6);
+    sqrByHeap(teste, 10);
+    for(i=0; i<10; i++){
+        printf("%d - ", teste[i].valor);
     }
 
     //printf("%.5f\n", temp_m[0]);
