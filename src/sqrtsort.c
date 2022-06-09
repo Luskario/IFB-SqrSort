@@ -81,18 +81,32 @@ Dado* sqrByHeap(Dado *V, int tam_total){
 		printf("%d ", Vmaiores[aux1].valor);
 	}
 	printf("\n");
+
+		//----------------------------------------------------------------------------------//
+
 	for(n=tam_total-1; n>=0; n--) {						//ordena os maiores valores no novo vetor ordenado
 		Vnew[n].valor = Vmaiores[0].valor;
+
 		aux3 = Vmaiores[0];
 		Vmaiores[0] = Vmaiores[n_part-1];
 		Vmaiores[n_part-1] = aux3;
 
-		for(aux1 = 0; aux1 < n_part; aux1++) {
-		printf("%d ", Vmaiores[aux1].valor);
-	}
-		printf("\n");
+		Vmaiores[n_part-1].percorridos++;
+		Vmaiores[n_part-1].indice++;
+		
+		if(Vmaiores[n_part-1].percorridos < tam_part && Vmaiores[n_part-1].indice < tam_total){
+			Vmaiores[n_part-1].valor = V[Vmaiores[n_part-1].indice].valor;
+		} else {
+			n_part--;
+		}
 
 		heapify_bottom_up(Vmaiores, n_part, n_part-1);
+		//makeHeap(Vmaiores, n_part, 0);
+		for(aux1 = 0; aux1 < n_part; aux1++) {
+			printf("%d ", Vmaiores[aux1].valor);
+		}
+		printf("\n");
+		
 	}
 
 
