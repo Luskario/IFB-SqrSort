@@ -63,12 +63,12 @@ void heapify(Dado *V, int tam_total, int i, int ini){
 	}
 }
 
-void heapify_bottom_up(int *V, int tam_total, int i){
-	int aux;
+void heapify_bottom_up(Dado *V, int tam_total, int i){
+	Dado aux;
 
 	while(i > 0){
 		int p = (i-1)/2;
-		if(V[p]<V[i]){
+		if(V[p].valor<V[i].valor){
 			aux = V[i];
 			V[i] = V[p];
 			V[p] = aux;

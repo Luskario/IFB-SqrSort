@@ -37,9 +37,9 @@ int main (void){
     }
     printf("\n");
     //makeHeap(teste, 4, 6);
-    sqrByHeap(teste, 10);
+    aux = sqrByHeap(teste, 10);
     for(i=0; i<10; i++){
-        printf("%d - ", teste[i].valor);
+        printf("%d - ", aux[i].valor);
     }
 
     //printf("%.5f\n", temp_m[0]);

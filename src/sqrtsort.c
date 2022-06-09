@@ -49,7 +49,7 @@ int* sqrByBubble(int *V, int tam_total){
 }
 
 
-int* sqrByHeap(Dado *V, int tam_total){
+Dado* sqrByHeap(Dado *V, int tam_total){
 	int aux1, aux2 = 0, n, tam_real;
 	int tam_part = (int) sqrt(tam_total);			// Definir os tamanhos de cada parte e o numero de partes
 	int n_part = (int) floor(tam_total/tam_part);
@@ -65,7 +65,8 @@ int* sqrByHeap(Dado *V, int tam_total){
 	}
 	
 	Dado *Vmaiores = (Dado*) malloc(10000*sizeof(Dado));
-	int *Vnew = calloc(tam_total, sizeof(int));
+	Dado aux3;
+	Dado *Vnew = calloc(tam_total, sizeof(int));
 	int maior = -999999999;
 
 	for(aux1 = 0; aux1 < n_part; aux1++) {			// seleciona os maiores de cada parte
@@ -76,13 +77,22 @@ int* sqrByHeap(Dado *V, int tam_total){
 	}
 
 	makeHeap(Vmaiores, n_part, 0);
-		
+	for(aux1 = 0; aux1 < n_part; aux1++) {
+		printf("%d ", Vmaiores[aux1].valor);
+	}
+	printf("\n");
 	for(n=tam_total-1; n>=0; n--) {						//ordena os maiores valores no novo vetor ordenado
-		Vnew[n] = Vmaiores[0].valor;
+		Vnew[n].valor = Vmaiores[0].valor;
+		aux3 = Vmaiores[0];
+		Vmaiores[0] = Vmaiores[n_part-1];
+		Vmaiores[n_part-1] = aux3;
 
-		//fazer o swap() depois adicionar o elemento no ultimo caso e usar o heapify inverso
-		
+		for(aux1 = 0; aux1 < n_part; aux1++) {
+		printf("%d ", Vmaiores[aux1].valor);
+	}
+		printf("\n");
 
+		heapify_bottom_up(Vmaiores, n_part, n_part-1);
 	}
 
 

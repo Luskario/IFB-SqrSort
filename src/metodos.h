@@ -15,6 +15,6 @@ void bubbleSort(int *V, int ini, int tam, int tam_total);
 //------------------------------------------------------------------------//
 void makeHeap(Dado *V, int tam_total, int ini);
 void heapify(Dado *V, int tam_total, int i, int ini);
-void heapify_bottom_up(int *V, int tam_total, int i);
+void heapify_bottom_up(Dado *V, int tam_total, int i);
 
 #endif
