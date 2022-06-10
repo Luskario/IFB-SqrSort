@@ -5,23 +5,26 @@
 #include "metodos.h"
 
 
-void gerarVetor(int *V, int tamanho){
+void gerarVetor(Dado *V, int tamanho){
 	srand(time(NULL));
 	int i;
 	for(i=0; i<tamanho; i++){
-		V[i] = rand() % 100000;
+		V[i].valor = rand() % 100000;
+		V[i].indice = 0;
+		V[i].percorridos = 0;
 	}
 }
 
-void bubbleSort(int *V, int ini, int tam, int tam_total){
-    int i, cont, aux;
+void bubbleSort(Dado *V, int ini, int tam, int tam_total){
+    int i, cont; 
+	Dado aux;
 		
 	do {
 		cont = 0;
 		//System.out.println(ini);
 		for(i=ini; (i<ini+tam-1) && (i<tam_total-1) ; i++) {	//Percorre o vetor
 			
-			if(V[i] < V[i+1]) {		//Troca
+			if(V[i].valor < V[i+1].valor) {		//Troca
 				aux = V[i];
 				V[i] = V[i+1];
 				V[i+1] = aux;
@@ -63,21 +66,16 @@ void heapify(Dado *V, int tam_total, int i, int ini){
 	}
 }
 
-void heapify_bottom_up(Dado *V, int tam_total, int i){
-	Dado aux;
+int removeRoot(Dado *V, int tam_total, int i){
 
-	while(i > 0){
-		int p = (i-1)/2;
-		if(V[p].valor<V[i].valor){
-			aux = V[i];
-			V[i] = V[p];
-			V[p] = aux;
-			i = p;
-		}
-		else{
-			break;
-		}
-	}
+	int aux = V[i].valor;
+	int valor = V[i+tam_total- 1].valor;
+    V[i].valor = valor;
+
+    tam_total = tam_total - 1;
+
+    heapify(V, tam_total, 0, i);
+	return aux;
 }
 
 void makeHeap(Dado *V, int tam_total, int ini){
@@ -88,3 +86,12 @@ void makeHeap(Dado *V, int tam_total, int ini){
 	}
 }
 
+int tamanhoParte(int i, int tam_total, int tam_part){
+	int tam_real;
+	if (i + tam_part > tam_total){
+		tam_real = tam_total - i;
+	} else { 
+		tam_real = tam_part;
+	}
+	return tam_real;
+}

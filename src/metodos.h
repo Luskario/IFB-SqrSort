@@ -10,11 +10,15 @@ struct dado
 
 typedef struct dado Dado;
 
-void gerarVetor(int *V, int tamanho);
-void bubbleSort(int *V, int ini, int tam, int tam_total);
+void gerarVetor(Dado *V, int tamanho);
+void bubbleSort(Dado *V, int ini, int tam, int tam_total);
 //------------------------------------------------------------------------//
 void makeHeap(Dado *V, int tam_total, int ini);
 void heapify(Dado *V, int tam_total, int i, int ini);
-void heapify_bottom_up(Dado *V, int tam_total, int i);
+//------------------------------------------------------------------------//
 
+int removeRoot(Dado *V, int tam_total, int i);
+
+//------------------------------------------------------------------------//
+int tamanhoParte(int i, int tam_total, int tam_part);
 #endif

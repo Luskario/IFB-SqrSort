@@ -4,7 +4,7 @@
 #include "metodos.h"
 
 
-int* sqrByBubble(int *V, int tam_total){
+Dado* sqrByBubble(Dado *V, int tam_total){
     int aux1, aux2 = 0, n;
 	int tam_part = (int) sqrt(tam_total);			// Definir os tamanhos de cada parte e o numero de partes
 	int n_part = (int) floor(tam_total/tam_part);
@@ -16,12 +16,12 @@ int* sqrByBubble(int *V, int tam_total){
 	}
 	
 	Dado *Vmaiores = (Dado*) malloc(10000*sizeof(Dado));
-	int *Vnew = calloc(tam_total, sizeof(int));
+	Dado *Vnew = calloc(tam_total, sizeof(int));
 	int maior = -999999999;
 
 	for(aux1 = 0; aux1 < n_part; aux1++) {			// seleciona os maiores de cada parte
 		aux2 = tam_part*aux1;
-		Vmaiores[aux1].valor = V[aux2];
+		Vmaiores[aux1].valor = V[aux2].valor;
         Vmaiores[aux1].indice = aux2;
         Vmaiores[aux1].percorridos = 0;
 	}
@@ -33,12 +33,12 @@ int* sqrByBubble(int *V, int tam_total){
 				aux2 = aux1;
 			}
 		}
-		Vnew[n] = maior;
+		Vnew[n].valor = maior;
         Vmaiores[aux2].indice++;
         Vmaiores[aux2].percorridos++;
 
 		if(Vmaiores[aux2].percorridos < tam_part && Vmaiores[aux2].indice < tam_total) {
-			Vmaiores[aux2].valor = V[Vmaiores[aux2].indice];
+			Vmaiores[aux2].valor = V[Vmaiores[aux2].indice].valor;
 		} else {
 			Vmaiores[aux2].valor = -999999999;
 		}
@@ -57,56 +57,40 @@ Dado* sqrByHeap(Dado *V, int tam_total){
 
 	for(aux1 = 0; aux1 < n_part; aux1++) {			//Ordena cada uma das partes
 		aux2 = tam_part*aux1;
-		if (aux2 + tam_part > tam_total){
-			tam_real = tam_total - aux2;
-		} else { tam_real = tam_part;}
-
+		tam_real = tamanhoParte(aux2, tam_total, tam_part);
 		makeHeap(V, tam_real, aux2);
 	}
 	
 	Dado *Vmaiores = (Dado*) malloc(10000*sizeof(Dado));
 	Dado aux3;
-	Dado *Vnew = calloc(tam_total, sizeof(int));
+	Dado *Vnew = calloc(tam_total, sizeof(Dado));
 	int maior = -999999999;
 
 	for(aux1 = 0; aux1 < n_part; aux1++) {			// seleciona os maiores de cada parte
 		aux2 = tam_part*aux1;
-		Vmaiores[aux1].valor = V[aux2].valor;
+		tam_real = tamanhoParte(aux2, tam_total, tam_part);
+		Vmaiores[aux1].valor = removeRoot(V, tam_real, aux2);
         Vmaiores[aux1].indice = aux2;
-        Vmaiores[aux1].percorridos = 0;
+        Vmaiores[aux1].percorridos = tam_real-1;
 	}
 
 	makeHeap(Vmaiores, n_part, 0);
-	for(aux1 = 0; aux1 < n_part; aux1++) {
-		printf("%d ", Vmaiores[aux1].valor);
-	}
-	printf("\n");
-
-		//----------------------------------------------------------------------------------//
 
 	for(n=tam_total-1; n>=0; n--) {						//ordena os maiores valores no novo vetor ordenado
+			
 		Vnew[n].valor = Vmaiores[0].valor;
-
-		aux3 = Vmaiores[0];
-		Vmaiores[0] = Vmaiores[n_part-1];
-		Vmaiores[n_part-1] = aux3;
-
-		Vmaiores[n_part-1].percorridos++;
-		Vmaiores[n_part-1].indice++;
 		
-		if(Vmaiores[n_part-1].percorridos < tam_part && Vmaiores[n_part-1].indice < tam_total){
-			Vmaiores[n_part-1].valor = V[Vmaiores[n_part-1].indice].valor;
-		} else {
+		if(Vmaiores[0].percorridos > 0){
+			Vmaiores[0].valor  = removeRoot(V, Vmaiores[0].percorridos, Vmaiores[0].indice);
+			Vmaiores[0].percorridos--;
+			heapify(Vmaiores, n_part, 0, 0);
+		} else{
+			aux3 = Vmaiores[0];
+			Vmaiores[0] = Vmaiores[n_part-1];
+			Vmaiores[n_part-1] = aux3;
 			n_part--;
+			heapify(Vmaiores, n_part, 0, 0);
 		}
-
-		heapify_bottom_up(Vmaiores, n_part, n_part-1);
-		//makeHeap(Vmaiores, n_part, 0);
-		for(aux1 = 0; aux1 < n_part; aux1++) {
-			printf("%d ", Vmaiores[aux1].valor);
-		}
-		printf("\n");
-		
 	}
 
 
