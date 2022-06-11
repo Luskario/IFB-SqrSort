@@ -41,11 +41,11 @@ int main (void){
 
     //-------------------------------- imprime os tempos de cada caso --------------------------------//
 
-    printf("SqrSort por Bubble:\n");
+    printf("SqrSort por Heap:\n");
     for(i=0; i<4; i++){
         printf("tamanho: %d - %.5f ms \n", tam[i], temp_m[i]);
     }
-    printf("SqrSort por Heap:\n");
+    printf("SqrSort por BubbleSort:\n");
     for(i=0; i<4; i++){
         printf("tamanho: %d - %.5f ms \n", tam[i], temp_m[4+i]);
     }
