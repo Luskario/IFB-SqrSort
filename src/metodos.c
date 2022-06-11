@@ -35,9 +35,7 @@ void bubbleSort(Dado *V, int ini, int tam, int tam_total){
 	} while(cont != 0);
 }
 
-
 //---------------------------------------------------------------------------------//
-
 
 void heapify(Dado *V, int tam_total, int i, int ini){
 	int aux;
@@ -85,6 +83,8 @@ void makeHeap(Dado *V, int tam_total, int ini){
 		heapify(V, tam_total, i, ini);
 	}
 }
+
+//---------------------------------------------------------------------------------//
 
 int tamanhoParte(int i, int tam_total, int tam_part){
 	int tam_real;
