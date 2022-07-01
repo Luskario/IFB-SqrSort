@@ -1,6 +1,6 @@
 # SqrSort
 
-    Nome: Lucas Rodrigues Vasconcelos e 
+    Nome: Lucas Rodrigues Vasconcelos e Arthur Carlos Neuhauss 
     Curso: ABI - Ciência da Computação
     Matéria: Analise de Algoritmos
 
