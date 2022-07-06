@@ -26,8 +26,8 @@ Dado* sqrByBubble(Dado *V, int tam_total){
 	for(aux1 = 0; aux1 < n_part; aux1++) { 
 		aux2 = tam_part*aux1;
 		Vmaiores[aux1].valor = V[aux2].valor;
-        Vmaiores[aux1].indice = aux2;
-        Vmaiores[aux1].percorridos = 0;
+       		Vmaiores[aux1].indice = aux2;
+        	Vmaiores[aux1].percorridos = 0;
 	}
 
 	//-------------------------- Ordena os maiores valores no novo vetor ordenado ------------------//
@@ -80,8 +80,8 @@ Dado* sqrByHeap(Dado *V, int tam_total){
 		aux2 = tam_part*aux1;
 		tam_real = tamanhoParte(aux2, tam_total, tam_part);
 		Vmaiores[aux1].valor = removeRoot(V, tam_real, aux2);
-        Vmaiores[aux1].indice = aux2;
-        Vmaiores[aux1].percorridos = tam_real-1;
+        	Vmaiores[aux1].indice = aux2;
+        	Vmaiores[aux1].percorridos = tam_real-1;
 	}
 	
 	//------------------------- Ordena os vetor dos maiores em Heap ------------------------------------//
